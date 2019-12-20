@@ -4,7 +4,7 @@ teaching: 20
 exercises: 10
 questions:
 - "Why is co-registering EEG data important?"
-- "How do I co-register EEG data?"
+- "How is co-registeration of EEG data done?"
 objectives:
 - "Understand why co-registering data is important."
 - "Understand how to co-register EEG data."

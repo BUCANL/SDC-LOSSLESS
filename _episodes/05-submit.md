@@ -26,14 +26,21 @@ keypoints:
     ```bash
     >> rsync -rthvv --prune-empty-dirs --progress --include="*sub*" --include="*/" --exclude="*" --exclude="/*/*/*/*/" sub-* [user_name]@gra-dtn1.computecanada.ca:/scratch/[user_name]/[project_name]/
     ```
-    > ## Note 
+    > ## Using gra-dtn1
+    > For transfering files to and from the remote it is recommended to use the `gra-dtn1.computecanada.ca` login node because it is dedicated to data transfer.
+    >
+    > {: .source}
+    {: .callout}
+
+    > ## Windows Support 
     > Windows does not have support for rsync. Use the following command instead:     
     >
     > ```bash
     > >> scp -r sub-* [user_name]@gra-dtn1.computecanada.ca:/scratch/[user_name]/[project_name]/
     > ```
     > {: .source}
-    {: .callout}
+    {: .discussion}
+
 
 ## Configuration file setup
 
@@ -59,15 +66,17 @@ keypoints:
     > {: .source}
     {: .callout}
 
-5. In the EEGLAB drop-down menu, navigate to **File->Batch->Batch Configuration** and click `| Get batch config file names |` to load the default batch configuration file(s) that can then be modified and saved. The configuration files we want to edit for the Face13 data are named `c01-c05` and are located in the `derivatives/BIDS-Lossless-EEG/code/config/face13_sbatch` folder. It is recommended that you load, edit and save the configutation files **one at a time**. 
+5. Once you have finished modifying the context configuration file, press enter or click off of the current field. Then select `| Save as |` and navigate to the `derivatives/BIDS-Lossless-EEG/code/config/` directory and save the configuration file here. It is recommended to save the context configuration file as `contextconfig_[user_name]_[project_name].cfg`. 
 
-6. Once you have a file selected, click the `| Clear/Load |` button to load the file into the property grid.
+6. In the EEGLAB drop-down menu, navigate to **File->Batch->Batch Configuration** and click `| Get batch config file names |` to load the default batch configuration file(s) that can then be modified and saved. The configuration files we want to edit for the Face13 data are named `c01-c05` and are located in the `derivatives/BIDS-Lossless-EEG/code/config/face13_sbatch` folder. It is recommended that you load, edit and save the configutation files **one at a time**. 
+
+7. Once you have a file selected, click the `| Clear/Load |` button to load the file into the property grid.
 
    ![Batch Config Window]({{ page.root }}/fig/batchconfig.png)
 
-7. Change the `submit_options` field in each batch configuration file to `--account=[group_name]`, where [group_name] is the name of your allocation group on Graham. The rest of the parameters in batch configuration files are optimized for the Face13 tutorial dataset.
+8. Change the `submit_options` field in each batch configuration file to `--account=[group_name]`, where [group_name] is the name of your allocation group on Graham. The rest of the parameters in batch configuration files are optimized for the Face13 tutorial dataset.
 
-8. Once you are done editing the parameters, you can click `|Save as|` and navigate back to the `derivatives/BIDS-Lossless-EEG/code/config/face13_sbatch` folder and save the configuration file with the same name as before. 
+9. Once you are done editing the parameters, press enter or click off of the current field. Then you can click `|Save as|` and navigate back to the `derivatives/BIDS-Lossless-EEG/code/config/face13_sbatch` folder and save the configuration file with the same name as before. 
 
     > ## Note
     > If you have loaded and edited multiple configuration files at once, after you click `| Save as |`, you **must** select all of the files and iteratively save each file.
@@ -75,7 +84,7 @@ keypoints:
     >{: .source}
     {: .callout}
 
-9. Click the `| Clear/New |` button and repeat the process for all seven of the batch configuration files (c01-c05).
+10. Click the `| Clear/New |` button and repeat the process for all seven of the batch configuration files (c01-c05).
 
 > ## Common Errors
 > An easy way to check for errors is to compare your newly created files against the default Face13 configurations on the [BUCANL Github](https://github.com/BUCANL/BIDS-Lossless-EEG/tree/master/code/config/face13_sbatch). In particular, the `order` subfield of each config file should remain exactly the same as the corresponding default file. If these have changed, you have most likely overwritten some of your config files. In this case, you will have to update these files and go through the editing process again. To update the files, you can copy and paste directly from the Github page to the configuration file in your project. 
@@ -90,6 +99,12 @@ keypoints:
 2. If your context configuration file is not already loaded, click `| Load context config |` and load the context configuration file you saved in step 3 above.
 
 3. If your batch configuration files are not already loaded, click `| Load batch config |` and then click `| Batch configuration file |` on the pop-up window. The configuration files we want to select for the Face13 data are in the `derivatives/BIDS-Lossless-EEG/code/config/face13_sbatch` folder. You want to select the seven files that are named 'c01-c05'.
+  
+    > ## Editing Config Files in a History Template Batch
+    > If you have made any changes to the context config or batch config files, make sure you press enter or click off of the current field. This will ensure any changes you have made are saved.
+    >
+    >{: .source}
+    {: .callout}
 
 4. Click `| History file |` and load all the scripts (s01-s05) corresponding to each of the batch configuration files (c01-c05). These scripts are located in the `derivatives/BIDS-Lossless-EEG/code/scripts/` directory.
 
@@ -136,8 +151,8 @@ keypoints:
     ```bash
     >> find derivatives/BIDS-Lossless-EEG/sub-* -type f -name "*.edf*"
     ```
-    > ## Note 
-	> Files that are missing from this find command did not make it all the way through the pipeline. The log files for the job submission can be investigated to determine why a file did not successfully complete. These log files are located in 'derivatives/BIDS-Lossless-EEG/log/'.   	 
+    > ## Missing Files 
+	> Files that are missing from this find command did not make it all the way through the pipeline. The log files for the job submission can be investigated to determine why a file did not successfully complete. These log files are located in `derivatives/BIDS-Lossless-EEG/log/`.   	 
 	>
 	> {: .source}
 	{: .callout}
@@ -154,14 +169,14 @@ keypoints:
     >> rsync -rthvv --prune-empty-dirs --progress --include="*dipole.mat" --include="*iclabel.mat" --include="*.edf" --include="*icaweights.*" --include="*icasphere.*" --include="*_annotations*" --include="*/" --exclude="*" --exclude="/*/*/*/*/" [user_name]@gra-dtn1.computecanada.ca:/scratch/[user_name]/[project_name]/derivatives/BIDS-Lossless-EEG/sub-* derivatives/BIDS-Lossless-EEG/
     ```
 
-    > ## Note 
+    > ## Windows Support 
     > Windows does not have support for rsync. Use the below command instead. Note that more files will be downloaded as a result of scp grabbing **all** files in the subject folders.
     >
     > ```bash
     > >> scp -r [user_name]@gra-dtn1.computecanada.ca:/scratch/[user_name]/[project_name]/derivatives/BIDS-Lossless-EEG/sub-* derivatives/BIDS-Lossless-EEG/
     > ```
     > {: .source}
-    {: .callout}
+    {: .discussion}
 
 
 5. Once this procedure is completed, you should notice all the output files in your **local** `derivatives/BIDS-Lossless-EEG/` directory. These files can now be put through the [QC procedure](https://bucanl.github.io/SDC-LOSSLESS-QC/index.html) for further processing.
