@@ -9,7 +9,7 @@ objectives:
 - "Submitting a batch of EEG files to run remotely through the Lossless pipeline."
 keypoints:
 - "Ensure you have all the pipeline files and your data files on both the **local** and **remote** machine."
-- "The input file for the Lossless pipeline is `*_eeg.edf` and the output files are `*.edf`, `*icasphere.tsv`, `*icaweights.tsv`, `*dipole.mat`,  `*_annotations.mat`, `*_annotations.tsv`, and `*_annotations.json`."
+- "The input file for the Lossless pipeline is `*_eeg.edf` and the output files are `*.edf`, `_ll.set`, `*icasphere.tsv`, `*icaweights.tsv`, `*dipole.mat`,  `*_annotations.mat`, `*_annotations.tsv`, and `*_annotations.json`."
 - "Remember to always pay attention to whether you are running a bash command on your **local** machine versus the **remote** computer cluster."
 ---
 
@@ -144,7 +144,7 @@ keypoints:
 
 ## Copy files from remote to local
 
-1. Once the files have successfully run through each stage of the pipeline, you should end up with an identical folder structure (`sub-*/eeg/`) in your **remote** `derivatives/BIDS-Lossless-EEG/` folder for each of the data files that ran through the pipeline. There will be intermediary files and several final output files for each participant. The final output files are `*.edf`, `*icasphere.tsv`, `*icaweights.tsv`, `*dipole.mat`, `*_annotations.mat`, `*_annotations.tsv`, `*_annotations.json`, and `*_iclabel.mat`. 
+1. Once the files have successfully run through each stage of the pipeline, you should end up with an identical folder structure (`sub-*/eeg/`) in your **remote** `derivatives/BIDS-Lossless-EEG/` folder for each of the data files that ran through the pipeline. There will be intermediary files and several final output files for each participant. The final output files are `*_ll.set`, `*.edf`, `*icasphere.tsv`, `*icaweights.tsv`, `*dipole.mat`, `*_annotations.mat`, `*_annotations.tsv`, `*_annotations.json`, and `*_iclabel.mat`. 
 
 2. To check if all files have in fact made it through the entire pipeline, you may locate these `*.edf*` files using the find command, and seeing if there are any files missing:
 
@@ -166,7 +166,7 @@ keypoints:
 4. Now, transfer the files using the following command in the terminal, replacing [user_name] with your own username and [project_name] with 'Face13':
 
     ```bash
-    >> rsync -rthvv --prune-empty-dirs --progress --include="*dipole.mat" --include="*iclabel.mat" --include="*.edf" --include="*icaweights.*" --include="*icasphere.*" --include="*_annotations*" --include="*/" --exclude="*" --exclude="/*/*/*/*/" [user_name]@gra-dtn1.computecanada.ca:/scratch/[user_name]/[project_name]/derivatives/BIDS-Lossless-EEG/sub-* derivatives/BIDS-Lossless-EEG/
+    >> rsync -rthvv --prune-empty-dirs --progress --include="*dipole.mat" --include="*iclabel.mat" --include="*.edf" --include="*icaweights.*" --include="*icasphere.*" --include="*_annotations*" --include="*_ll*" --include="*/" --exclude="*" --exclude="/*/*/*/*/" [user_name]@gra-dtn1.computecanada.ca:/scratch/[user_name]/[project_name]/derivatives/BIDS-Lossless-EEG/sub-* derivatives/BIDS-Lossless-EEG/
     ```
 
     > ## Windows Support 
