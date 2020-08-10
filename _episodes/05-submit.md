@@ -9,7 +9,7 @@ objectives:
 - "Submitting a batch of EEG files to run remotely through the Lossless pipeline."
 keypoints:
 - "Ensure you have all the pipeline files and your data files on both the **local** and **remote** machine."
-- "The input file for the Lossless pipeline is `*_eeg.edf` and the output files are `*.edf`, `_ll.set`, `*icasphere.tsv`, `*icaweights.tsv`, `*dipole.mat`,  `*_annotations.mat`, `*_annotations.tsv`, and `*_annotations.json`."
+- "The input file for the Lossless pipeline is `*_eeg.edf` and the output files are `*.edf`, `*_ll.set`, `*icasphere.tsv`, `*icaweights.tsv`, `*dipole.mat`,  `*_annotations.mat`, `*_annotations.tsv`, and `*_annotations.json`."
 - "Remember to always pay attention to whether you are running a bash command on your **local** machine versus the **remote** computer cluster."
 ---
 
@@ -40,6 +40,15 @@ keypoints:
     > ```
     > {: .source}
     {: .discussion}
+
+    > ## Running Your Own Data- Staging Script 
+    > The staging script allows for additions to datafiles before they enter actual processing, such as the addition of in-task and break period annotations. If you are running your own data, a staging script can be customized for your dataset. The custom staging script would then need to be uploaded onto Graham where it will run during s01. More information on customizing a staging script can be found in the reference manual on the [BIDS-Lossless-EEG wiki](https://github.com/BUCANL/BIDS-Lossless-EEG/wiki/Staging-Script). To upload your custom staging script to Graham, use the following command and update [staging_script] with the file name of your staging script as well as [user_name] and [project_name] with the appropriate names:
+    >
+    > ```bash
+    > >> scp derivatives/BIDS-Lossless-EEG/code/scripts/[staging_script] [user_name]@gra-dtn1.computecanada.ca:/scratch/[user_name]/[project_name]/derivatives/BIDS-Lossless-EEG/code/scripts
+    > ```
+    > {: .source}
+    {: .checklist}
 
 
 ## Configuration file setup
@@ -75,6 +84,12 @@ keypoints:
    ![Batch Config Window]({{ page.root }}/fig/batchconfig.png)
 
 8. Change the `submit_options` field in each batch configuration file to `--account=[group_name]`, where [group_name] is the name of your allocation group on Graham. The rest of the parameters in batch configuration files are optimized for the Face13 tutorial dataset.
+
+    > ## Running Your Own Data- Optimizing Parameters 
+    > Each script in the Lossless pipeline has parameters that relate to outlier detection criteria, montage information, and path specifications. Prior to running your own data through the Lossless pipeline, optiminal parameters should be determined. More information about the parameters in each script of the pipeline can be found on the [BIDS-Lossless-EEG wiki](https://github.com/BUCANL/BIDS-Lossless-EEG/wiki/Pipeline-Scripts). The [Lossless Pipeline Parameter Tutorial](https://bucanl.github.io/SDC-LOSSLESS-PARAMS/) can be used to learn about the outlier dectection criteria and how to determine appropriate parameter values for your dataset. 
+    >
+    > {: .source}
+    {: .checklist}
 
 9. Once you are done editing the parameters, press enter or click off of the current field. Then you can click `|Save as|` and navigate back to the `derivatives/BIDS-Lossless-EEG/code/config/face13_sbatch` folder and save the configuration file with the same name as before. 
 
@@ -149,7 +164,7 @@ keypoints:
 2. To check if all files have in fact made it through the entire pipeline, you may locate these `*.edf*` files using the find command, and seeing if there are any files missing:
 
     ```bash
-    >> find derivatives/BIDS-Lossless-EEG/sub-* -type f -name "*.edf*"
+    >> find derivatives/BIDS-Lossless-EEG/sub-* -type f -name "*_ll.set*"
     ```
     > ## Missing Files 
 	> Files that are missing from this find command did not make it all the way through the pipeline. The log files for the job submission can be investigated to determine why a file did not successfully complete. These log files are located in `derivatives/BIDS-Lossless-EEG/log/`.   	 

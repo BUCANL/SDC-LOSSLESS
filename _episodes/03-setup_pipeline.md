@@ -19,6 +19,18 @@ keypoints:
     >> cd path/to/project/directory/Face13
     ```
 
+    > ## Creating Project Folder
+    > If you have not yet created your project folder (Face13 for the tutorial) or initalized your data, you should begin with the [BIDS-EEG-EEGLAB tutorial](https://bucanl.github.io/SDC-BIDS-EEG-EEGLAB/).
+    >
+    > {: .source}
+    {: .callout}
+
+    > ## Running Your Own Data- Project Name
+    > If you are running your own data you will have a different project name than Face13. Throughout this tutorial, replace Face13 with your own project name.
+    >
+    > {: .source}
+    {: .checklist}
+
 2. If there is not already a derivatives folder within your project folder, create a derivatives folder:
 
     ```bash
