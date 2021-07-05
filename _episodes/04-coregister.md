@@ -24,7 +24,7 @@ Co-registering is the process of aligning the recording montage with a standard 
 2. Open EEGLAB by typing the following into the command window:
 
     ```matlab
-    >> addpath derivatives/BIDS-Lossless-EEG/code/install
+    >> addpath derivatives/EEG-IP-L/code/install
     >> lossless_path
     >> eeglab
     ```
@@ -67,7 +67,7 @@ Co-registering is the process of aligning the recording montage with a standard 
 
 6. When you are satisfied with the alignment between the two montages, select the `Ok` button.
 
-7. In the MATLAB command window, it will print: [montage_info] for c01_scalpart.cfg followed by the transformation matrix (nine numbers). Copy and paste these values into the `[montage_info]` field in the `c01_scalpart_remote.cfg` file located in `derivatives/BIDS-Lossless-EEG/code/config/face13_sbatch`. These numbers need to be within square brackets in the batch configuration file. 
+7. In the MATLAB command window, it will print: [montage_info] for c01_scalpart.cfg followed by the transformation matrix (nine numbers). Copy and paste these values into the `[montage_info]` field in the `c01_scalpart_remote.cfg` file located in `derivatives/EEG-IP-L/code/config/face13_sbatch`. These numbers need to be within square brackets in the batch configuration file. 
 
     ![Transformation Matrix]({{ page.root }}/fig/highlightedtransformmatrix.png)
 

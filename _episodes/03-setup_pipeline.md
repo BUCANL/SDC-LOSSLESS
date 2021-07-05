@@ -20,7 +20,7 @@ keypoints:
     ```
 
     > ## Creating Project Folder
-    > If you have not yet created your project folder (Face13 for the tutorial) or initalized your data, you should begin with the [BIDS-EEG-EEGLAB tutorial](https://bucanl.github.io/SDC-BIDS-EEG-EEGLAB/).
+    > If you have not yet created your project folder (Face13 for the tutorial) or initalized your data, you should begin with the [BIDS-EEG-EEGLAB tutorial](https://carpentries-incubator.github.io/SDC-BIDS-EEG-EEGLAB/).
     >
     > {: .source}
     {: .callout}
@@ -46,7 +46,7 @@ keypoints:
 4. Within the derivatives folder, clone/download the pipeline repository. **NOTE:** Use the recursive flag in order to clone all the required submodules:
 
     ```bash
-    >> git clone --recursive https://github.com/BUCANL/BIDS-Lossless-EEG.git
+    >> git clone --recursive https://github.com/BUCANL/EEG-IP-L.git
     ```
 
 ## Download/Setup the pipeline (remote)
@@ -90,14 +90,14 @@ keypoints:
 7. Within the derivatives folder, clone/download the pipeline repository. **NOTE:** Use the recursive flag in order to clone all the required submodules:
 
     ```bash
-    >> git clone --recursive https://github.com/BUCANL/BIDS-Lossless-EEG.git
+    >> git clone --recursive https://github.com/BUCANL/EEG-IP-L.git
     ```
 
 ## Remote setup
 
 If you are starting a new study, this process will need to be repeated. However, the Octave package installation will typically proceed much quicker if the new study is being run on the same account. 
 
-1. Navigate to the folder that contains your octave packages:
+1. Navigate to the folder that contains your octave packages. Note that if this is your first time running the EEG-IP-L pipeline, you will not have an octave folder until after you run the Setup Remote script and you can skip forward to Step 3.
 
     ```bash
     >> cd ~/octave
@@ -114,17 +114,17 @@ If you are starting a new study, this process will need to be repeated. However,
 4. Run the remote setup script and follow the on screen prompts:
 
     ```bash
-    >> bash derivatives/BIDS-Lossless-EEG/code/install/setup-remote.sh
+    >> bash derivatives/EEG-IP-L/code/install/setup-remote.sh
     ```
 
 > ## Errors with Setup Remote 
 > If the `setup-remote.sh` procedure fails, or needs to be rerun for any reason, the **lock** files must be removed. These files prevent portions of the `setup-remote.sh` procedure from being run. An important distinction is that these files are created upon success **or** failure. This means that if something has gone wrong during the process, the lock files will need to be removed or `setup-remote.sh` will skip that section of the procedure. Below are the bash commands to remove the four lock files that are created. These commands are meant to be run from the project root on the remote.
 >
 > ```bash
-> >> rm derivatives/BIDS-Lossless-EEG/code/misc/locks/amica-make.lock
-> >> rm derivatives/BIDS-Lossless-EEG/code/misc/locks/executable-files.lock
-> >> rm derivatives/BIDS-Lossless-EEG/code/misc/locks/fieldtrip-made.lock
-> >> rm derivatives/BIDS-Lossless-EEG/code/misc/locks/octave-pkgs.lock
+> >> rm derivatives/EEG-IP-L/code/misc/locks/amica-make.lock
+> >> rm derivatives/EEG-IP-L/code/misc/locks/executable-files.lock
+> >> rm derivatives/EEG-IP-L/code/misc/locks/fieldtrip-made.lock
+> >> rm derivatives/EEG-IP-L/code/misc/locks/octave-pkgs.lock
 > ```
 >
 >{: .source}
